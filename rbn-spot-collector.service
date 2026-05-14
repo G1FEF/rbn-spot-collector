@@ -1,0 +1,17 @@
+[Unit]
+Description=RBN Spot Collector daemon
+After=network-online.target mariadb.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=rbn
+Group=rbn
+WorkingDirectory=/opt/rbn-spot-collector
+EnvironmentFile=/opt/rbn-spot-collector/.env
+ExecStart=/opt/rbn-spot-collector/.venv/bin/python /opt/rbn-spot-collector/app.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
